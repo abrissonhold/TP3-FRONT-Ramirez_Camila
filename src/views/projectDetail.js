@@ -1,5 +1,8 @@
+import { loadInformation } from "../services/informationAPI.js";
 import { getProjectById } from "../services/projectsAPI.js";
+import { sendDecision } from "../services/projectsAPI.js";
 import { DetailCard } from "../components/cards.js";
+import { PopUp } from "../components/steppop.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
@@ -11,37 +14,54 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    const project = await getProjectById(id);
-    renderDetail(project);
+    try {
+        const project = await getProjectById(id);
+        renderDetail(project);
+        updateHeader(project.user.name);
+    } catch (error) {
+        document.getElementById("detailcard").innerHTML =
+            "<p>Error al cargar el proyecto.</p>";
+        console.error(error);
+    }
 });
 
 function renderDetail(project) {
     const container = document.getElementById("detailcard");
-    container.innerHTML += DetailCard(project);
+    container.innerHTML = DetailCard(project);
 }
 
-const loadTasks = (tasks) => {
-    const tasksContainer = document.getElementById("tasks");
-    if (tasks.length === 0) {
-        tasklist.innerHTML = "<h3>No hay tareas para mostrar.</h3>";
-    }
-    tasks.forEach((task) => {
-        const taskElement = document.createElement("li");
-        taskElement.innerText = task.Name;
-        tasksContainer.appendChild(taskElement);
-    });
+function updateHeader(name) {
+    const header = document.querySelector("main header h1");
+    header.textContent = `Propuesta de ${name}`;
+}
+
+window.openDecisionModal = async (stepId, projectId, requiredRoleName) => {
+    const { users, statuses } = await loadInformation();
+    const filteredUsers = users.filter(u => u.approverRole?.name === requiredRoleName);
+
+    const modal = document.createElement("div");
+    modal.classList.add("modal-decision");
+        modal.innerHTML = PopUp(stepId, projectId, requiredRoleName, filteredUsers, statuses);
+    document.body.appendChild(modal);
 };
 
-const loadInteractions = (interactions) => {
-    const interactionsContainer = document.getElementById("interactions");
-    if (interactions.length === 0) {
-        interactionlist.innerHTML = "<h3>No hay interacciones para mostrar.</h3>";
-    }
-    interactions.forEach((interaction) => {
-        const interactionElement = document.createElement("li");
-        interactionElement.innerText = interaction.Notes;
-        interactionsContainer.appendChild(interactionElement);
-    });
-};
+window.submitDecision = async (stepId, projectId) => {
+    const user = parseInt(document.getElementById("userSelect").value);
+    const status = parseInt(document.getElementById("statusSelect").value);
+    const observation = document.getElementById("obsInput").value;
 
-window.onload = loadProjectDetails;
+    const data = {
+        id: stepId,
+        user: user,
+        status: status,
+        observation: observation?.trim() || null
+    };
+
+    try {
+        await sendDecision(projectId, data);
+        alert("Decisión registrada correctamente");
+        location.reload();
+    } catch (e) {
+        alert("Error al enviar la decisión: " + e.message);
+    }
+};

@@ -47,3 +47,30 @@ export const createProject = async (projectData) => {
         return null;
     }
 };
+
+export const sendDecision = async (projectId, decisionData) => {
+    try {
+        const response = await fetch(`https://localhost:7099/api/Project/${projectId}/decision`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(decisionData)
+        });
+
+        const text = await response.text();
+
+        if (!response.ok) {
+            try {
+                const json = JSON.parse(text);
+                throw new Error(json.message || "Error desconocido");
+            } catch {
+                console.error("Respuesta no JSON del backend:", text);
+                throw new Error("Error interno del servidor: " + text.slice(0, 100));
+            }
+        }
+
+        return JSON.parse(text);
+    } catch (error) {
+        console.error("Error:", error.message);
+        throw error;
+    }
+};

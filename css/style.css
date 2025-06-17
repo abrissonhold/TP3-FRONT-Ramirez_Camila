@@ -213,10 +213,17 @@ button:focus {
     border-radius: 10px;
 }
 
-.nextprev,
-.sumbit {
+.decision {
+    margin: 10px;
     border-radius: 10px;
     width: calc(40% - 5px);
+}
+.decision-no {
+    margin: 10px;
+    border-radius: 10px;
+    width: calc(40% - 5px);
+    background-color: var(--light-gray);
+    color: var(--light-purple);
 }
 
 .detalles {
@@ -256,6 +263,18 @@ button:focus {
     width: 100%;
 }
 
+.steps-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.steps-container .list-card {
+  width: calc(33.333% - 20px);
+  min-width: 250px;
+}
+
 .list-card {
     padding: 15px;
     border-radius: 15px;
@@ -263,8 +282,60 @@ button:focus {
     border: 0.5px solid var(--light-purple);
     background-color: rgba(166, 172, 228, 0.705);
     color: var(--text-dark);
-    height: 40%;
     width: 100%;
+}
+
+.modal-decision {
+    position: absolute;
+    top: 0px;
+    left: 190px;
+    width: calc(100%);
+    height: calc(100%);
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 500px;
+}
+
+.modal-content h4 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  margin-top: 4px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.modal-buttons .btn {
+  min-width: 100px;
 }
 
 .footer {

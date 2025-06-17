@@ -4,7 +4,8 @@ export function Card(project) {
             <h3>${project.title}</h3>
             <p><strong>Área:</strong> ${project.area}</p>
             <p><strong>Tipo:</strong> ${project.type}</p>
-            <p class="status-${project.status.toLowerCase()}"><strong>Estado: ${project.status}</strong></p>
+            <p class="status-${project.status.toLowerCase()}"><strong>Estado: ${project.status
+    }</strong></p>
             <p><strong>Monto estimado:</strong> $${project.amount}</p>
             <p><strong>Duración:</strong> ${project.duration} días</p>
             <button class="detalles" onclick=
@@ -25,15 +26,30 @@ export function DetailCard(project) {
       <p><strong>Estado: <span class="status-${project.status.name.toLowerCase()}">${project.status.name}</span></strong></p>
       <hr />
       <h4>Pasos de aprobación</h4>
-      ${project.steps.map(step => `
+      ${project.steps
+      .map(
+        (step) => `
         <div class="list-card">
           <p><strong>Orden:</strong> ${step.stepOrder}</p>
           <p><strong>Rol revisor:</strong> ${step.approverRole.name}</p>
-          <p><strong>Usuario:</strong> ${step.approverUser?.name || 'No asignado'}</p>
-          <p><strong>Estado: <span class="status-${step.status.name.toLowerCase()}"> ${step.status.name}</strong></p>
-          <p><strong>Observaciones:</strong> ${step.observations || '-'}</p>
-          <p><strong>Fecha de decisión:</strong> ${step.decisionDate ? new Date(step.decisionDate).toLocaleDateString() : '-'}</p>
-        </div>
-      `).join('')}
+          <p><strong>Usuario:</strong> ${step.approverUser?.name || "No asignado"
+          }</p>
+          <p><strong>Estado: <span class="status-${step.status.name.toLowerCase()}"> ${step.status.name
+          }</strong></p>
+          <p><strong>Observaciones:</strong> ${step.observations || "-"}</p>
+          <p><strong>Fecha de decisión:</strong> ${step.decisionDate
+            ? new Date(step.decisionDate).toLocaleDateString()
+            : "-"
+          }</p>
+          ${step.status.name === "Pending"
+            ? `
+            <button class="decision" onclick="openDecisionModal(${step.id}, '${project.id}', '${step.approverRole.name}')">
+              Tomar decisión
+            </button>`
+            : ""
+          }</div>
+      `
+      )
+      .join("")}
   `;
 }
