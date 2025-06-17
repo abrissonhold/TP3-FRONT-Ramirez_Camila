@@ -26,12 +26,19 @@ async function renderFilteredProjects() {
     try {
         const projects = await getProjects(filters);
         container.innerHTML = "";
-
-        projects.forEach((project) => {
-            container.innerHTML += Card(project);
-        });
+        if (projects.length == 0) {
+            document.getElementById("listado").innerHTML = `
+                <div class="text-center mt-5">
+                    <img src="images/no-content.png" alt="No hay datos" style="max-width: 150px;">
+                    <p class="mt-3">Ups... no hay proyectos que mostrar.</p>
+                </div>`;
+        } else {
+            projects.forEach((project) => {
+                container.innerHTML += Card(project);
+            });
+        }
     } catch (error) {
-        container.innerHTML = "<p>Error al cargar los proyectos</p>";
+        container.innerHTML = "<p>Error al cargar los proyectos</p>"
         console.error(error);
     }
 

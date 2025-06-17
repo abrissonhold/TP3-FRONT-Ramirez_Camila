@@ -1,8 +1,7 @@
 import { loadInformation } from "../services/informationAPI.js";
-import { getProjectById } from "../services/projectsAPI.js";
-import { sendDecision } from "../services/projectsAPI.js";
+import { getProjectById, sendDecision,updateProject } from "../services/projectsAPI.js";
 import { DetailCard } from "../components/cards.js";
-import { PopUp } from "../components/steppop.js";
+import { PopUp, PopEditar } from "../components/pops.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
@@ -10,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!id) {
         document.getElementById("detailcard").innerHTML =
-            "<p>Proyecto no encontrado</p>";
+            "<p class='error'>Proyecto no encontrado</p> <img src='images/no-content.png' alt='No hay datos' style='max-width: 150px;'/>";
         return;
     }
 
@@ -20,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         updateHeader(project.user.name);
     } catch (error) {
         document.getElementById("detailcard").innerHTML =
-            "<p>Error al cargar el proyecto.</p>";
+            "<p class='error'>Error al cargar el proyecto.</p><img src='images/no-content.png' alt='No hay datos' style='max-width: 150px;'/>";
         console.error(error);
     }
 });
@@ -60,7 +59,35 @@ window.submitDecision = async (stepId, projectId) => {
     try {
         await sendDecision(projectId, data);
         location.reload();
-    } catch (e) {
-        alert("Error al enviar la decisión: " + e.message);
+    } catch (e) {      
+        document.getElementById("detailcard").innerHTML =
+            "<p class='mt-3'>Error al enviar la decisión.</p><img src='images/no-content.png' alt='No hay datos' style='max-width: 150px;'/>";
+        console.error(e.message);
     }
 };
+
+window.openEditModal = (projectId, title, description, duration) => {
+    const modal = document.createElement("div");
+    modal.classList.add("modal-decision");
+
+    modal.innerHTML = PopEditar(projectId, title, description, duration);
+
+    document.body.appendChild(modal);
+};
+
+window.submitEditProject = async (projectId) => {
+    const updatedData = {
+        title: document.getElementById("editTitle").value.trim(),
+        description: document.getElementById("editDesc").value.trim(),
+        duration: parseInt(document.getElementById("editDuration").value)
+    };
+
+    try {
+        await updateProject(projectId, updatedData);
+        alert("Proyecto actualizado correctamente");
+        location.reload();
+    } catch (error) {
+        alert("Error al actualizar: " + error.message);
+        console.error(error);
+    }
+}

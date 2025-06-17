@@ -5,7 +5,13 @@ body {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    font-size: 0.9rem;
+    font-size: 0.9rem;    
+    background-color: var(--light-gray);
+    font-weight: 400;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 :root {
@@ -26,31 +32,12 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
-.main-content {
-    flex: 1;
-    padding: 0px;
-    background-color: var(--light-gray);
-    min-height: 100%;
-}
-
-body {
-    background-color: var(--light-gray);
-    font-weight: 400;
-    color: var(--text-dark);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    width: 100%;
-}
-
 .container-fluid {
     display: flex;
     flex: 1;
     padding: 0;
     margin: 0;
     width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
 }
 
 div.container-fluid {
@@ -104,6 +91,13 @@ div.container-fluid {
     color: var(--text-dark);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.main-content {
+    flex: 1;
+    padding: 0px;
+    background-color: var(--light-gray);
+    min-height: 100%;
 }
 
 header {
@@ -166,40 +160,32 @@ select:focus {
     color: var(--light-gray);
 }
 
-.status-pending {
-    color: var(--status-pendiente);
-}
-
-.status-approved {
-    color: var(--status-aprobado);
-}
-
-.status-rejected {
-    color: var(--status-rechazado);
-}
-
-.status-observed {
-    color: var(--status-observado);
-} 
-
 .project-card p {
     margin: auto;
 }
 
-#pagination {
+.card-footer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-bottom: 30px;
-    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
 }
+
+.status-pending { color: var(--status-pendiente); }
+.status-approved { color: var(--status-aprobado); }
+.status-rejected { color: var(--status-rechazado); }
+.status-observed { color: var(--status-observado); }
 
 button {
     background-color: var(--light-purple);
     border-radius: 10px;
     padding: 15px;
     color: var(--light-gray);
+    border: 0.5px solid var(--light-purple);    
     border: 0.5px solid var(--light-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 button:hover,
@@ -209,18 +195,16 @@ button:focus {
     transition: all 0.2s ease-in-out;
 }
 
-.buscar {
+.buscar, .decision, .decision-no {
     border-radius: 10px;
 }
 
 .decision {
     margin: 10px;
-    border-radius: 10px;
     width: calc(40% - 5px);
 }
 .decision-no {
     margin: 10px;
-    border-radius: 10px;
     width: calc(40% - 5px);
     background-color: var(--light-gray);
     color: var(--light-purple);

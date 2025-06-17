@@ -4,13 +4,14 @@ export function Card(project) {
             <h3>${project.title}</h3>
             <p><strong>Área:</strong> ${project.area}</p>
             <p><strong>Tipo:</strong> ${project.type}</p>
-            <p class="status-${project.status.toLowerCase()}"><strong>Estado: ${project.status
-    }</strong></p>
+            <p class="status-${project.status.toLowerCase()}"><strong>Estado: ${project.status}</strong></p>
             <p><strong>Monto estimado:</strong> $${project.amount}</p>
             <p><strong>Duración:</strong> ${project.duration} días</p>
+            <div class="card-footer">
             <button class="detalles" onclick=
             "window.location.href='detail.html?id=${project.id}'">
             Ver detalles</button>
+            </div>
         </div>
     `;
 }
@@ -51,5 +52,11 @@ export function DetailCard(project) {
       `
       )
       .join("")}
+      ${project.status.name === "Observed" ? `
+          <button class="decision" onclick="window.openEditModal('${project.id}', '${project.title}', \`${project.description}\`, ${project.duration})">
+            Editar proyecto
+          </button>
+      ` : ''}
+
   `;
 }

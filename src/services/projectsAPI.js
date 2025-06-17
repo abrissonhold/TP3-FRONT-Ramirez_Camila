@@ -8,7 +8,8 @@ export const getProjects = async (filters = {}) => {
 
     const queryString = params.toString();
     const response = await fetch(`https://localhost:7099/api/Project?${queryString}`);
-
+    if (response.status === 404) return [];
+    
     if (!response.ok) {
         console.error('Error al obtener proyectos');
         return [];
@@ -73,4 +74,19 @@ export const sendDecision = async (projectId, decisionData) => {
         console.error("Error:", error.message);
         throw error;
     }
+};
+
+export const updateProject = async (id, data) => {
+  const res = await fetch(`https://localhost:7099/api/Project/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(error.slice(0, 100));
+  }
+
+  return await res.json();
 };
