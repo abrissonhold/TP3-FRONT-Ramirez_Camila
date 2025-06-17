@@ -1,0 +1,300 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    font-size: 0.9rem;
+}
+
+:root {
+    --light-gray: #f6f7f9;
+    --light-pink: #e79dfd;
+    --light-purple: #6d6bf3;
+    --dark-purple: #292197;
+    --dark-blue: #151240;
+    --text-dark: #060029;
+    --status-pendiente: #f3dc5c;
+    --status-aprobado: #0f9e4b;
+    --status-rechazado: #db1b06;
+    --status-observado: #d88200;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+.main-content {
+    flex: 1;
+    padding: 0px;
+    background-color: var(--light-gray);
+    min-height: 100%;
+}
+
+body {
+    background-color: var(--light-gray);
+    font-weight: 400;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.container-fluid {
+    display: flex;
+    flex: 1;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+div.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.sidebar {
+    background-color: var(--dark-blue);
+    width: 190px;
+    color: white;
+    min-height: 100vh;
+}
+
+.sidebar .brand {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.sidebar .brand #logo {
+    width: 9rem;
+}
+
+.sidebar .brand h2 {
+    color: white;
+    font-size: 1.8rem;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.sidebar nav ul li {
+    margin: 10px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+.sidebar nav ul li a.active,
+.sidebar nav ul li a:hover {
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 2rem;
+    padding: 20px;
+}
+
+header .filter-section {
+    background-color: var(--dark-blue);
+    padding: 10px;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 30px 0 0;
+    width: 97%;
+}
+
+input[type="text"],
+select {
+    padding: 10px;
+    font-size: 1rem;
+    width: calc(30% - 10px);
+    border: 1px solid var(--light-purple);
+    border-radius: 5px;
+    background-color: rgba(246, 247, 249, 0.801);
+    color: var(--text-dark);
+    transition: background-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+    background-color: var(--light-gray);
+}
+
+#cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.project-card {
+    background-color: var(--dark-blue);
+    border-radius: 10px;
+    width: calc(30% - 5px);
+    padding: 15px;
+    margin: 10px 0px 10px 0px;
+    text-align: center;
+    color: var(--light-gray);
+}
+
+.status-pending {
+    color: var(--status-pendiente);
+}
+
+.status-approved {
+    color: var(--status-aprobado);
+}
+
+.status-rejected {
+    color: var(--status-rechazado);
+}
+
+.status-observed {
+    color: var(--status-observado);
+} 
+
+.project-card p {
+    margin: auto;
+}
+
+#pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+button {
+    background-color: var(--light-purple);
+    border-radius: 10px;
+    padding: 15px;
+    color: var(--light-gray);
+    border: 0.5px solid var(--light-purple);
+}
+
+button:hover,
+button:focus {
+    opacity: 0.9;
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
+}
+
+.buscar {
+    border-radius: 10px;
+}
+
+.nextprev,
+.sumbit {
+    border-radius: 10px;
+    width: calc(40% - 5px);
+}
+
+.detalles {
+    background-color: var(--light-gray);
+    padding: 5px;
+    border-radius: 10px;
+    width: 100%;
+    margin: 5px;
+    border: 0.5px solid var(--light-purple);
+    color: var(--dark-purple);
+}
+
+#detailcard {
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px;
+    margin: 10px 10px 0px 10px;
+    border: 0.5px solid var(--light-purple);
+    border-bottom: 0;
+    color: var(--light-purple);
+    text-align: center;
+    height: 100vh;
+}
+
+#detailcard p {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+#detailcard .project-card {
+    padding: 15px;
+    border-radius: 10px 10px 0px 0px;
+    margin: 10px 0px 0px 0px;
+    border: 0.5px solid var(--light-purple);
+    border-bottom: 0;
+    height: 95%;
+    width: 100%;
+}
+
+.list-card {
+    padding: 15px;
+    border-radius: 15px;
+    margin: 10px 0px 0px 0px;
+    border: 0.5px solid var(--light-purple);
+    background-color: rgba(166, 172, 228, 0.705);
+    color: var(--text-dark);
+    height: 40%;
+    width: 100%;
+}
+
+.footer {
+    background-color: var(--light-purple);
+    color: var(--text-dark);
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--light-pink);
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .cards {
+        flex-direction: column;
+    }
+
+    .project-card {
+        width: 100%;
+    }
+}

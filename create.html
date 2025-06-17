@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="images/IconoBlanco.png" />
+    <title>Nuevo proyecto</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <aside class="sidebar">
+            <header class="brand">
+                <a href="layout.html">
+                    <img src="images/IconoBlanco.png" alt="logo" id="logo" />
+                    <h2>TaskFlow</h2>
+                </a>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Tus proyectos</a></li>
+                    <li><a href="create.html" class="active">Crear nuevo proyecto</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Crear Nuevo Proyecto</h1>
+            </header>
+
+            <section>
+                <form id="projectForm">
+                    <div class="form-group">
+                        <label for="projectName">Nombre del Proyecto</label>
+                        <input type="text" id="projectName" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientId">Cliente</label>
+                        <select id="clientId" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="campaignType">Tipo de Campaña</label>
+                        <select id="campaignType" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startDate">Fecha de Inicio</label>
+                        <input type="date" id="startDate" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endDate">Fecha de Fin</label>
+                        <input type="date" id="endDate" required />
+                    </div>
+
+                    <button type="submit" id = "sumbit" class = "sumbit">Crear Proyecto</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 Gestión de Proyectos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src=".\src\views\newProyect.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="images/IconoBlanco.png" />
+    <title>Detalle del Proyecto</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <aside class="sidebar">
+            <header class="brand">
+                <a href="index.html">
+                    <img src="images/IconoBlanco.png" alt="logo" id="logo" />
+                    <h2>TaskFlow</h2>
+                </a>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Tus proyectos</a></li>
+                    <li><a href="create.html">Crear nuevo proyecto</a></li>
+                    <li><a href="detail.html" class="active">Tu proyecto</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Proyecto de </h1>
+            </header>
+
+            <div id="detailcard"></div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 Gestión de Proyectos. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+<script src="./src/views/projectDetail.js" type="module"></script>
+
+</html>

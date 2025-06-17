@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="images/IconoBlanco.png" />
+    <title>Gestión de proyectos</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <aside class="sidebar">
+            <header class="brand">
+                <a href="index.html" class="active">
+                    <img src="images/IconoBlanco.png" alt="logo" id="logo" />
+                    <h2>TaskFlow</h2>
+                </a>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Tus proyectos</a></li>
+                    <li><a href="create.html">Crear nuevo proyecto</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Gestión de Proyectos</h1>
+                <div class="filter-section">
+                    <input type="text" id="search-projects" placeholder="Buscar proyecto por nombre..." />
+                    <select id="filter-status">
+                        <option value="">Filtrar por estado</option>
+                        <!-- Carga dinámica de estados-->
+                    </select>
+                    <select id="filter-user">
+                        <option value="">Filtrar por usuario</option>
+                        <!-- Carga dinámica de clientes -->
+                    </select>
+                    <button class="buscar">Buscar</button>
+                </div>
+            </header>
+
+            <section class="cards" id="cards">
+                <!-- Carga dinámica de los proyectos -->
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Gestión de Proyectos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="./src/views/main.js" type="module"></script>
+
+</body>
+
+</html>
