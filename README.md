@@ -1,8 +1,6 @@
-# CRMFront
+# Front Gestion de Proyectos
 
-<a href="https://abrissonhold.github.io/CRMFront/layout">Ir a layout </a>
 <br>
-
 <details>
 <summary>TECNOLOGÍAS</summary> 
 - HTML <br>
