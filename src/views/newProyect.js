@@ -1,47 +1,36 @@
-import { createProject } from '../services/projectsAPI.js';
-import ApiCampaignTypes from '../services/campaignTypesAPI.js';
-import ApiClients from '../services/clientsAPI.js';
+import { createProject } from "../services/projectsAPI.js";
+import { ProjectForm } from "../components/createform.js";
+import { loadInformation } from "../services/informationAPI.js";
 
-const loadCampaignsAndClients = async () => {
-    const campaignSelect = document.getElementById('campaignType');
-    const campaigns = await ApiCampaignTypes.Get();
-    campaigns.forEach(campaign => {
-        const option = document.createElement('option');
-        option.value = campaign.id;
-        option.text = campaign.name;
-        campaignSelect.appendChild(option);
+document.addEventListener("DOMContentLoaded", async () => {
+    const form = document.getElementById("projectForm");
+
+    const { areas, projectTypes, users } = await loadInformation();
+
+    form.innerHTML = ProjectForm(areas, projectTypes, users);
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const project = {
+            title: document.getElementById("title").value,
+            description: document.getElementById("description").value,
+            amount: parseFloat(document.getElementById("amount").value),
+            duration: parseInt(document.getElementById("duration").value),
+            area: parseInt(document.getElementById("area").value),
+            type: parseInt(document.getElementById("type").value),
+            user: parseInt(document.getElementById("user").value)
+        };
+
+        try {
+            const result = await createProject(project);
+            if (result) {
+                window.location.href = "index.html";
+            } else {
+                alert("Error al crear proyecto.");
+            }
+        } catch (err) {
+            alert("Ocurrió un error: " + err.message);
+        }
     });
-    const clientSelect = document.getElementById('clientId');
-    const clients = await ApiClients.Get();
-    clients.forEach(client => {
-        const option = document.createElement('option');
-        option.value = client.clientID;
-        option.text = client.name;
-        clientSelect.appendChild(option);
-    });
-};
-
-const formSubmit = async () => {
-    const projectName = document.getElementById('projectName').value;
-    const clientId = document.getElementById('clientId').value;
-    const campaignType = document.getElementById('campaignType').value;
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
-
-    const newProject = {
-        ProjectName: projectName,
-        ClientId: clientId,
-        CampaignTypeId: campaignType,
-        StartDate: startDate,
-        EndDate: endDate,
-    };
-
-    await createProject(newProject);
-    window.location.href = 'layout.html';  
-};
-
-window.onload = async () => {
-    await loadCampaignsAndClients();
-};
-
-document.getElementById("sumbit").addEventListener("click", formSubmit);
+});

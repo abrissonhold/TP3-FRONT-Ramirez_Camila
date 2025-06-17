@@ -28,7 +28,7 @@ export const getProjectById = async (id) => {
 
 export const createProject = async (projectData) => {
     try {
-        const response = await fetch('https://localhost:7108/api/v1/Project', {
+        const response = await fetch('https://localhost:7099/api/Project', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

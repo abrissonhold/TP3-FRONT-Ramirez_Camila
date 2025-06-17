@@ -59,7 +59,6 @@ window.submitDecision = async (stepId, projectId) => {
 
     try {
         await sendDecision(projectId, data);
-        alert("Decisión registrada correctamente");
         location.reload();
     } catch (e) {
         alert("Error al enviar la decisión: " + e.message);
