@@ -1,12 +1,7 @@
-export function PopUp(stepId, projectId, requiredRoleName, filteredUsers, statuses) {
+export function PopDecision(stepId, projectId, statuses) {
     return `
       <div class="modal-content">
         <h4>Decidir Paso ${stepId}</h4>
-
-        <label>Usuario (${requiredRoleName}):</label>
-        <select id="userSelect">${filteredUsers.map(u =>
-        `<option value="${u.id}">${u.name}</option>`).join('')}
-        </select>
 
         <label>Estado:</label>
         <select id="statusSelect">

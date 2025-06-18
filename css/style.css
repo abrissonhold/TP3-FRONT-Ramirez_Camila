@@ -174,27 +174,26 @@ header .filter-section {
     border-bottom-left-radius: 0;
     font-size: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin: 0 30px 0 0;
     width: 97%;
 }
-search-projects {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-}
 
+#search-projects,
 .form-control,
 select {
     padding: 10px;
     font-size: 1rem;
-    width: calc(30% - 20px);
+    width: calc(20% - 20px);
     border: 1px solid var(--light-purple);
     border-radius: 5px;
-    background-color: rgba(246, 247, 249, 0.801);
+    background-color: rgba(255, 255, 255, 0.9);
     color: var(--text-dark);
     transition: background-color 0.3s ease;
+    height: 3.5rem;
+}
+#search-projects {
+    width: 30%;
 }
 
 .form-control:focus,
@@ -272,13 +271,14 @@ button:focus {
 .decision,
 .decision-no {
     border-radius: 10px;
+    
 }
 
 .buscar {
     width: calc(30% - 5px)!important;
     background-color: var(--light-purple);
     color: var(--light-gray);
-    margin-right: 10px;
+    margin: 0 !important;
     display: flex;
     align-items: center;
     justify-content: center;

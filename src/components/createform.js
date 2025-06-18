@@ -1,4 +1,4 @@
-export function ProjectForm(areasRes, typesRes, users) {
+export function ProjectForm(areasRes, typesRes, users, userId) {
     return `
         <div class="form-group">
             <label for="title"><h4>Título</h4></label>
@@ -24,8 +24,8 @@ export function ProjectForm(areasRes, typesRes, users) {
             <label for="area"><h4>Área</h4></label>
             <select class="form-control" id="area" required>
             ${areasRes
-                .map((area) => `<option value="${area.id}">${area.name}</option>`)
-                .join("")}
+            .map((area) => `<option value="${area.id}">${area.name}</option>`)
+            .join("")}
             </select>
         </div>
 
@@ -33,18 +33,9 @@ export function ProjectForm(areasRes, typesRes, users) {
             <label for="type"><h4>Tipo de proyecto</h4></label>
             <select class="form-control" id="type" required>
             ${typesRes
-                .map((type) => `<option value="${type.id}">${type.name}</option>`)
-                .join("")}
+            .map((type) => `<option value="${type.id}">${type.name}</option>`)
+            .join("")}
             </select>
-        </div>
-
-        <div class="form-group">
-            <label for="user"><h4>Usuario creador</h4></label>
-            <select class="form-control" id="user" required>
-            ${users
-                .map((u) => `<option value="${u.id}">${u.name}</option>`)
-                .join("")}
-            </select>      
         </div>
 
     <button type="submit" class="decision">Crear Proyecto</button>

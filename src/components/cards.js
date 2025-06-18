@@ -41,7 +41,7 @@ export function DetailCard(project, currentUser) {
               <p><strong>Estado:            <span class="status-${step.status.name.toLowerCase()}"> ${step.status.name}</span></strong></p>
               <p><strong>Observaciones:     </strong> ${step.observations || "-"}</p>
               <p><strong>Fecha de decisión: </strong> ${step.decisionDate ? new Date(step.decisionDate).toLocaleDateString() : "-"}</p>
-              ${step.status.name === "Pending" ? `
+              ${step.status.name === "Pending" && canDecide? `
                 <button class="decision d-flex flex-column justify-content-between" onclick="openDecisionModal(${step.id}, '${project.id}', '${step.approverRole.name}')">
                   Tomar decisión
                 </button>` : ""
@@ -52,7 +52,7 @@ export function DetailCard(project, currentUser) {
       )
       .join("")}
 
-      ${project.status.name === "Observed" ? `
+      ${project.status.name === "Observed" && project.user.id === currentUser.id ?  `
           <button class="decision" onclick="window.openEditModal('${project.id}', '${project.title}', \`${project.description}\`, ${project.duration})">
             Editar proyecto
           </button>

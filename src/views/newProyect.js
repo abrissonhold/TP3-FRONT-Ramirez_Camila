@@ -18,11 +18,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.location.href = "login.html";
         });
     }
-    
+
     const form = document.getElementById("projectForm");
     const { areas, projectTypes, users } = await loadInformation();
 
-    form.innerHTML = ProjectForm(areas, projectTypes, users);
+    form.innerHTML = ProjectForm(areas, projectTypes, users, userId);
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             duration: parseInt(document.getElementById("duration").value),
             area: parseInt(document.getElementById("area").value),
             type: parseInt(document.getElementById("type").value),
-            user: parseInt(document.getElementById("user").value)
+            user: userId,
         };
 
         try {

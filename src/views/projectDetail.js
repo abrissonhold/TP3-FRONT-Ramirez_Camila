@@ -1,7 +1,7 @@
 import { loadInformation } from "../services/informationAPI.js";
 import { getProjectById, sendDecision, updateProject } from "../services/projectsAPI.js";
 import { DetailCard } from "../components/cards.js";
-import { PopUp, PopEditar } from "../components/pops.js";
+import { PopDecision, PopEditar } from "../components/pops.js";
 import { NoContent } from "../components/nocontent.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -49,23 +49,21 @@ function updateHeader(name) {
 }
 
 window.openDecisionModal = async (stepId, projectId, requiredRoleName) => {
-    const { users, statuses } = await loadInformation();
-    const filteredUsers = users.filter(u => u.approverRole?.name === requiredRoleName);
-
+    const { statuses } = await loadInformation();
     const modal = document.createElement("div");
     modal.classList.add("modal-decision");
-    modal.innerHTML = PopUp(stepId, projectId, requiredRoleName, filteredUsers, statuses);
+    modal.innerHTML = PopDecision(stepId, projectId, statuses);
     document.body.appendChild(modal);
 };
 
 window.submitDecision = async (stepId, projectId) => {
-    const user = parseInt(document.getElementById("userSelect").value);
     const status = parseInt(document.getElementById("statusSelect").value);
     const observation = document.getElementById("obsInput").value;
+    const userId = parseInt(localStorage.getItem("userId"));
 
     const data = {
         id: stepId,
-        user: user,
+        user: userId,
         status: status,
         observation: observation?.trim() || null
     };
@@ -74,8 +72,7 @@ window.submitDecision = async (stepId, projectId) => {
         await sendDecision(projectId, data);
         location.reload();
     } catch (e) {
-        document.getElementById("detailcard").innerHTML =
-            "<p class='mt-3'>Error al enviar la decisión.</p><img src='images/no-content.png' alt='No hay datos' style='max-width: 150px;'/>";
+        document.getElementById("detailcard").innerHTML = NoContent("Error al enviar la decisión. Por favor, intente nuevamente.");
         console.error(e.message);
     }
 };
