@@ -1,20 +1,20 @@
-import { getProjects } from "../services/projectsAPI.js";
+import { getProjects, getProjectById } from "../services/projectsAPI.js";
 import { loadInformation } from "../services/informationAPI.js";
 import { Card } from "../components/cards.js";
-
-const userId = parseInt(localStorage.getItem("userId"));
-
-if (!userId) {
-  alert("Debés iniciar sesión primero");
-  window.location.href = "login.html";
-}
-
-const { users } = await loadInformation();
-const user = users.find(u => u.id === userId);
-
-document.getElementById("user-name").textContent = user?.name || "Invitado";
+import { NoContent } from "../components/nocontent.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const userId = parseInt(localStorage.getItem("userId"));
+
+    if (!userId) {
+        alert("Debés iniciar sesión primero");
+        window.location.href = "login.html";
+    }
+
+    const { users } = await loadInformation();
+    const user = users.find(u => u.id === userId);
+    document.getElementById("user-name").textContent = user?.name || "Invitado";
+    
     await loadFilters();
     await renderFilteredProjects();
 
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function renderFilteredProjects() {
+
     const title = document.getElementById("search-projects").value.trim();
     const status = document.getElementById("filter-status").value;
     const applicant = document.getElementById("filter-user").value;
@@ -44,22 +45,31 @@ async function renderFilteredProjects() {
         applicant: applicant || null,
     };
 
-    try {
-        const projects = await getProjects(filters);
+    try {    
+        container.innerHTML = `
+            <div class="loader">
+                <span>Cargando proyectos...</span>
+            </div>
+        `;
+        const userId = parseInt(localStorage.getItem("userId"));
+        const projectsShort = await getProjects(filters); 
+        const allDetails = await Promise.all(projectsShort.map(p => getProjectById(p.id)));
+
+        const visibleProjects = allDetails.filter(p =>
+            p.user?.id === userId || p.steps?.some(s => s.approverUser?.id === userId)
+        );
+
         container.innerHTML = "";
-        if (projects.length == 0) {
-            document.getElementById("listado").innerHTML = `
-                <div class="text-center mt-5">
-                    <img src="images/no-content.png" alt="No hay datos" style="max-width: 150px;">
-                    <p class="mt-3">Ups... no hay proyectos que mostrar.</p>
-                </div>`;
+
+        if (visibleProjects.length === 0) {            
+            document.getElementById("listado").innerHTML = NoContent("No se encontraron proyectos con los filtros aplicados");
         } else {
-            projects.forEach((project) => {
+            visibleProjects.forEach((project) => {
                 container.innerHTML += Card(project);
             });
         }
     } catch (error) {
-        container.innerHTML = "<p>Error al cargar los proyectos</p>"
+        container.innerHTML = NoContent("Error al cargar los proyectos".toUpperCase());
         console.error(error);
     }
 

@@ -32,6 +32,24 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.loader span {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  animation: blink 1.5s infinite ease-in-out;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
 .container-fluid {
     display: flex;
     flex: 1;
@@ -160,6 +178,12 @@ header .filter-section {
     margin: 0 30px 0 0;
     width: 97%;
 }
+search-projects {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
 
 .form-control,
 select {
@@ -233,6 +257,8 @@ button {
     align-items: center;
     justify-content: center;
     width: 100% !important;
+    padding: 10px;
+    margin: 4px !important;
 }
 
 button:hover,
@@ -246,6 +272,17 @@ button:focus {
 .decision,
 .decision-no {
     border-radius: 10px;
+}
+
+.buscar {
+    width: calc(30% - 5px)!important;
+    background-color: var(--light-purple);
+    color: var(--light-gray);
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
 .decision {

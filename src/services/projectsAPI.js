@@ -4,7 +4,7 @@ export const getProjects = async (filters = {}) => {
     if (filters.title) params.append("title", filters.title);
     if (filters.status) params.append("status", filters.status);
     if (filters.applicant) params.append("applicant", filters.applicant);
-    if (filters.approvalUser) params.append('approvalUser', approvalUser);
+    if (filters.approvalUser) params.append('approvalUser', filters.approvalUser);
 
     const queryString = params.toString();
     const response = await fetch(`https://localhost:7099/api/Project?${queryString}`);

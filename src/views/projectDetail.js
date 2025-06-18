@@ -1,49 +1,47 @@
 import { loadInformation } from "../services/informationAPI.js";
-import { getProjectById, sendDecision,updateProject } from "../services/projectsAPI.js";
+import { getProjectById, sendDecision, updateProject } from "../services/projectsAPI.js";
 import { DetailCard } from "../components/cards.js";
 import { PopUp, PopEditar } from "../components/pops.js";
-
-const userId = parseInt(localStorage.getItem("userId"));
-if (!userId) {
-  alert("Debés iniciar sesión primero");
-  window.location.href = "login.html";
-}
-
-const { users } = await loadInformation();
-const currentUser = users.find(u => u.id === userId);
-
-document.getElementById("logoutIcon").addEventListener("click", (e) => {
-  e.preventDefault();
-  localStorage.removeItem("userId");
-  window.location.href = "login.html";
-});
-
+import { NoContent } from "../components/nocontent.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const userId = parseInt(localStorage.getItem("userId"));
+
+    if (!userId) {
+        alert("Debés iniciar sesión primero");
+        window.location.href = "login.html";
+    }
+
+    const { users } = await loadInformation();
+    const currentUser = users.find(u => u.id === userId);
+
+    const logoutIcon = document.getElementById("logoutIcon");
+    if (logoutIcon) {
+        logoutIcon.addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("userId");
+            window.location.href = "login.html";
+        });
+    }
+
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
     if (!id) {
-        document.getElementById("detailcard").innerHTML =
-            "<p class='error'>Proyecto no encontrado</p> <img src='images/no-content.png' alt='No hay datos' style='max-width: 150px;'/>";
+        document.getElementById("detailcard").innerHTML = NoContent("Proyecto no encontrado");
         return;
     }
 
     try {
         const project = await getProjectById(id);
-        renderDetail(project);
+        const container = document.getElementById("detailcard");
+        container.innerHTML = DetailCard(project, currentUser);
         updateHeader(project.user.name);
     } catch (error) {
-        document.getElementById("detailcard").innerHTML =
-            "<p class='error'>Error al cargar el proyecto.</p><img src='images/no-content.png' alt='No hay datos' style='max-width: 150px;'/>";
+        document.getElementById("detailcard").innerHTML = NoContent("Error al cargar el proyecto.");
         console.error(error);
     }
 });
-
-function renderDetail(project) {
-    const container = document.getElementById("detailcard");
-    container.innerHTML = DetailCard(project, currentUser);
-}
 
 function updateHeader(name) {
     const header = document.querySelector("main header h1");
@@ -56,7 +54,7 @@ window.openDecisionModal = async (stepId, projectId, requiredRoleName) => {
 
     const modal = document.createElement("div");
     modal.classList.add("modal-decision");
-        modal.innerHTML = PopUp(stepId, projectId, requiredRoleName, filteredUsers, statuses);
+    modal.innerHTML = PopUp(stepId, projectId, requiredRoleName, filteredUsers, statuses);
     document.body.appendChild(modal);
 };
 
@@ -75,7 +73,7 @@ window.submitDecision = async (stepId, projectId) => {
     try {
         await sendDecision(projectId, data);
         location.reload();
-    } catch (e) {      
+    } catch (e) {
         document.getElementById("detailcard").innerHTML =
             "<p class='mt-3'>Error al enviar la decisión.</p><img src='images/no-content.png' alt='No hay datos' style='max-width: 150px;'/>";
         console.error(e.message);
@@ -100,7 +98,6 @@ window.submitEditProject = async (projectId) => {
 
     try {
         await updateProject(projectId, updatedData);
-        alert("Proyecto actualizado correctamente");
         location.reload();
     } catch (error) {
         alert("Error al actualizar: " + error.message);

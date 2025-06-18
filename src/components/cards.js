@@ -2,9 +2,9 @@ export function Card(project) {
   return `
         <div class="project-card">
             <h3>${project.title}</h3>
-            <p><strong>Área:</strong> ${project.area}</p>
-            <p><strong>Tipo:</strong> ${project.type}</p>
-            <p class="status-${project.status.toLowerCase()}"><strong>Estado: ${project.status}</strong></p>
+            <p><strong>Área:</strong> ${project.area.name}</p>
+            <p><strong>Tipo:</strong> ${project.type.name}</p>
+            <p class="status-${project.status.name.toLowerCase()}"><strong>Estado: ${project.status.name}</strong></p>
             <p><strong>Monto estimado:</strong> $${project.amount}</p>
             <p><strong>Duración:</strong> ${project.duration} días</p>
             <div class="card-footer mt-2 d-flex flex-column justify-content-between">

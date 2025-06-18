@@ -2,23 +2,24 @@ import { createProject } from "../services/projectsAPI.js";
 import { ProjectForm } from "../components/createform.js";
 import { loadInformation } from "../services/informationAPI.js";
 
-const userId = parseInt(localStorage.getItem("userId"));
-
-if (!userId) {
-  alert("Debés iniciar sesión primero");
-  window.location.href = "login.html";
-}
-
-document.getElementById("logoutIcon").addEventListener("click", (e) => {
-  e.preventDefault();
-  localStorage.removeItem("userId");
-  window.location.href = "login.html";
-});
-
-
 document.addEventListener("DOMContentLoaded", async () => {
-    const form = document.getElementById("projectForm");
+    const userId = parseInt(localStorage.getItem("userId"));
 
+    if (!userId) {
+        alert("Debés iniciar sesión primero");
+        window.location.href = "login.html";
+    }
+
+    const logoutIcon = document.getElementById("logoutIcon");
+    if (logoutIcon) {
+        logoutIcon.addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("userId");
+            window.location.href = "login.html";
+        });
+    }
+    
+    const form = document.getElementById("projectForm");
     const { areas, projectTypes, users } = await loadInformation();
 
     form.innerHTML = ProjectForm(areas, projectTypes, users);
