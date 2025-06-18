@@ -2,9 +2,30 @@ import { getProjects } from "../services/projectsAPI.js";
 import { loadInformation } from "../services/informationAPI.js";
 import { Card } from "../components/cards.js";
 
+const userId = parseInt(localStorage.getItem("userId"));
+
+if (!userId) {
+  alert("Debés iniciar sesión primero");
+  window.location.href = "login.html";
+}
+
+const { users } = await loadInformation();
+const user = users.find(u => u.id === userId);
+
+document.getElementById("user-name").textContent = user?.name || "Invitado";
+
 document.addEventListener("DOMContentLoaded", async () => {
     await loadFilters();
     await renderFilteredProjects();
+
+    const logoutIcon = document.getElementById("logoutIcon");
+    if (logoutIcon) {
+        logoutIcon.addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("userId");
+            window.location.href = "login.html";
+        });
+    }
 
     document.querySelector(".buscar").addEventListener("click", async () => {
         await renderFilteredProjects();

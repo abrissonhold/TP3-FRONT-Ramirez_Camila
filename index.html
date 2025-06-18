@@ -29,18 +29,23 @@
                     <li><a href="create.html">Crear nuevo proyecto</a></li>
                 </ul>
             </nav>
+                <div class="login-btn text-center mt-auto mb-3">
+                    <a href="login.html" id="loginIcon">
+                        <img src="images/usuario.png" alt="Cambiar sesión" class="user-icon" />
+                    </a>
+                </div>
         </aside>
 
         <main class="main-content">
             <header>
-                <h1>Gestión de Proyectos</h1>
+                <h1>Hola, <span id="user-name"></span>!</h1>
                 <div class="filter-section">
                     <input type="text" id="search-projects" placeholder="Buscar proyecto por nombre..." />
-                    <select id="filter-status">
+                    <select id="filter-status" title="Filtrar por estado">
                         <option value="">Filtrar por estado</option>
                         <!-- Carga dinámica de estados-->
                     </select>
-                    <select id="filter-user">
+                    <select id="filter-user" title="Filtrar por usuario">
                         <option value="">Filtrar por usuario</option>
                         <!-- Carga dinámica de clientes -->
                     </select>

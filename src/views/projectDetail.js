@@ -3,6 +3,22 @@ import { getProjectById, sendDecision,updateProject } from "../services/projects
 import { DetailCard } from "../components/cards.js";
 import { PopUp, PopEditar } from "../components/pops.js";
 
+const userId = parseInt(localStorage.getItem("userId"));
+if (!userId) {
+  alert("Debés iniciar sesión primero");
+  window.location.href = "login.html";
+}
+
+const { users } = await loadInformation();
+const currentUser = users.find(u => u.id === userId);
+
+document.getElementById("logoutIcon").addEventListener("click", (e) => {
+  e.preventDefault();
+  localStorage.removeItem("userId");
+  window.location.href = "login.html";
+});
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
@@ -26,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function renderDetail(project) {
     const container = document.getElementById("detailcard");
-    container.innerHTML = DetailCard(project);
+    container.innerHTML = DetailCard(project, currentUser);
 }
 
 function updateHeader(name) {

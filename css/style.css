@@ -5,7 +5,7 @@ body {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    font-size: 0.9rem;    
+    font-size: 0.9rem;
     background-color: var(--light-gray);
     font-weight: 400;
     color: var(--text-dark);
@@ -45,11 +45,47 @@ div.container-fluid {
     padding-left: 0px;
 }
 
+.login-body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--dark-blue);
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.login-card {
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+    padding: 2rem;
+    border-radius: 10px;
+    min-width: 300px;
+    box-shadow: 0 4px 12px var(--light-purple);
+}
+
 .sidebar {
     background-color: var(--dark-blue);
     width: 190px;
     color: white;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-btn {
+    margin-top: auto;
+    padding-bottom: 1rem;
+}
+
+.login-btn img {
+    width: 40px;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.login-btn img:hover {
+    transform: scale(1.1);
 }
 
 .sidebar .brand {
@@ -165,27 +201,38 @@ select:focus {
 }
 
 .card-footer {
+    margin-top: auto;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+    justify-content: center;
 }
 
-.status-pending { color: var(--status-pendiente); }
-.status-approved { color: var(--status-aprobado); }
-.status-rejected { color: var(--status-rechazado); }
-.status-observed { color: var(--status-observado); }
+.status-pending {
+    color: var(--status-pendiente);
+}
+
+.status-approved {
+    color: var(--status-aprobado);
+}
+
+.status-rejected {
+    color: var(--status-rechazado);
+}
+
+.status-observed {
+    color: var(--status-observado);
+}
 
 button {
     background-color: var(--light-purple);
     border-radius: 10px;
     padding: 15px;
     color: var(--light-gray);
-    border: 0.5px solid var(--light-purple);    
+    border: 0.5px solid var(--light-purple);
     border: 0.5px solid var(--light-purple);
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100% !important;
 }
 
 button:hover,
@@ -195,16 +242,17 @@ button:focus {
     transition: all 0.2s ease-in-out;
 }
 
-.buscar, .decision, .decision-no {
+.buscar,
+.decision,
+.decision-no {
     border-radius: 10px;
 }
 
 .decision {
-    margin: 10px;
     width: calc(40% - 5px);
 }
+
 .decision-no {
-    margin: 10px;
     width: calc(40% - 5px);
     background-color: var(--light-gray);
     color: var(--light-purple);
@@ -248,15 +296,15 @@ button:focus {
 }
 
 .steps-container {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .steps-container .list-card {
-  width: calc(33.333% - 20px);
-  min-width: 250px;
+    width: calc(33.333% - 20px);
+    min-width: 250px;
 }
 
 .list-card {
@@ -282,44 +330,44 @@ button:focus {
 }
 
 .modal-content {
-  background: white;
-  padding: 20px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  width: 100%;
-  max-width: 500px;
+    background: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
 }
 
 .modal-content h4 {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 .modal-content label {
-  display: block;
-  margin-top: 10px;
-  font-weight: 600;
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
 }
 
 .modal-content select,
 .modal-content textarea {
-  width: 100%;
-  margin-top: 4px;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid var(--light-purple);
+    width: 100%;
+    margin-top: 4px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid var(--light-purple);
 }
 
 .modal-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 1rem;
 }
 
 .modal-buttons .btn {
-  min-width: 100px;
+    min-width: 100px;
 }
 
 .footer {

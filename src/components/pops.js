@@ -40,8 +40,8 @@ export function PopEditar(projectId, title, description, duration) {
         <input type="number" id="editDuration" class="form-control" value="${duration}" min="1" />
 
         <div class="modal-buttons">
-          <button class="btn btn-success" onclick="window.submitEditProject('${projectId}')">Guardar</button>
-          <button class="btn btn-secondary" onclick="this.closest('.modal-decision').remove()">Cancelar</button>
+          <button class="decision" onclick="window.submitEditProject('${projectId}')">Guardar</button>
+          <button class="decision-no" onclick="this.closest('.modal-decision').remove()">Cancelar</button>
         </div>
       </div>
     `;
