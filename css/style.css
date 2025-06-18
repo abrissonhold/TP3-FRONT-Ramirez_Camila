@@ -217,6 +217,9 @@ select:focus {
     margin: 10px 0px 10px 0px;
     text-align: center;
     color: var(--light-gray);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .project-card p {
@@ -300,7 +303,7 @@ button:focus {
     padding: 5px;
     border-radius: 10px;
     width: 100%;
-    margin: 5px;
+    margin-top: auto;
     border: 0.5px solid var(--light-purple);
     color: var(--dark-purple);
 }
