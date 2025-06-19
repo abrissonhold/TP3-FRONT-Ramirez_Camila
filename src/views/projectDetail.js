@@ -110,3 +110,15 @@ window.submitEditProject = async (projectId) => {
         console.error(error);
     }
 }
+
+window.showModal = function(message) {
+  const modal = document.getElementById("modalInfo");
+  const msgElem = document.getElementById("modalMessage");
+  msgElem.textContent = message;
+  modal.style.display = "flex";
+};
+
+window.closeModal = function() {
+  const modal = document.getElementById("modalInfo");
+  modal.style.display = "none";
+};

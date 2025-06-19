@@ -38,29 +38,38 @@ export function DetailCard(project, currentUser) {
 
     <section class="approval-steps mt-4">
       <h4>Pasos de aprobación</h4>
-      <div class="steps-grid">
-        ${project.steps.map(step => {
-          const canDecide = step.approverUser?.id === currentUser.id ||
-                            (!step.approverUser && step.approverRole?.id === currentUser.approverRole?.id);
+        <div class="steps-grid">
+          ${project.steps.map(step => {
+            const canDecide = step.approverUser?.id === currentUser.id ||
+            (!step.approverUser && step.approverRole?.id === currentUser.approverRole?.id);
+            const previousStepsApproved = project.steps
+              .filter(s => s.stepOrder < step.stepOrder)
+              .every(s => s.status.name !== "Pending");
+            const shouldShow = step.status.name === "Pending" && canDecide && project.status.name !== "Rejected" && project.status.name !== "Observed";
+            const disabled = !previousStepsApproved;
 
-          return `
-            <div class="step-card">
-              <div><strong>Paso ${step.stepOrder}</strong>
-                <div class="status-box status-${step.status.name.toLowerCase()}">${step.status.name.toUpperCase()}</div>
-              </div>
-              <div class="info-box"><strong>Rol:</strong> ${step.approverRole.name}</div>
-              <div class="info-box"><strong>Usuario:</strong> ${step.approverUser?.name || "No asignado"}</div>
-              <div class="info-box"><strong>Observaciones:</strong> ${step.observations || "-"}</div>
-              <div class="info-box"><strong>Fecha:</strong> ${step.decisionDate ? new Date(step.decisionDate).toLocaleDateString() : "-"}</div>
+            return `
+                  <div class="step-card">
+                    <div>
+                      <strong>Paso ${step.stepOrder}</strong>
+                      <div class="status-box status-${step.status.name.toLowerCase()}">${step.status.name.toUpperCase()}</div>
+                    </div>
+                    <div class="info-box"><strong>Rol:</strong> ${step.approverRole.name}</div>
+                    <div class="info-box"><strong>Usuario:</strong> ${step.approverUser?.name || "No asignado"}</div>
+                    <div class="info-box"><strong>Observaciones:</strong> ${step.observations || "-"}</div>
+                    <div class="info-box"><strong>Fecha:</strong> ${step.decisionDate ? new Date(step.decisionDate).toLocaleDateString() : "-"}</div>
 
-              ${step.status.name === "Pending" && canDecide ? `
-                <button class="decision" onclick="openDecisionModal(${step.id}, '${project.id}', '${step.approverRole.name}')">
-                  Tomar decisión
-                </button>` : ""}
-            </div>
-          `;
-        }).join("")}
-      </div>
+                    ${shouldShow ? `
+                      <button   class="decision ${disabled ? 'disabled-btn' : ''}" 
+                        onclick="${disabled 
+                        ? `showModal('Este paso no puede ser evaluado hasta que se aprueben los anteriores')`
+                        : `openDecisionModal(${step.id}, '${project.id}', '${step.approverRole.name}')`
+                        }"> Tomar decisión 
+                      </button>` : ""            
+                    }
+                  </div>`;
+            }).join("")}
+        </div>
     </section>
 
     ${(project.status.name === "Observed" && project.user.id === currentUser.id) ? `
@@ -70,5 +79,15 @@ export function DetailCard(project, currentUser) {
         </button>
       </div>
     ` : ""}
+
+    <div id="modalInfo" class="modal-decision" style="display:none">
+      <div class="modal-content">
+        <h4>Información</h4>
+        <p id="modalMessage">Texto por defecto</p>
+        <div class="modal-buttons">
+          <button class="decision" onclick="closeModal()">Aceptar</button>
+        </div>
+      </div>
+    </div>
   `;
 }
