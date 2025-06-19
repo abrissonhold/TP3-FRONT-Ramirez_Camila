@@ -1,7 +1,7 @@
 export function PopDecision(stepId, projectId, statuses) {
     return `
       <div class="modal-content">
-        <h4>Decidir Paso ${stepId}</h4>
+        <h4>Decidir Paso</h4>
 
         <label>Estado:</label>
         <select id="statusSelect">

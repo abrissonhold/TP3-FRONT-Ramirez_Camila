@@ -40,8 +40,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             const result = await createProject(project);
             if (result) {
-                window.location.href = "index.html";
-            } else {
+                showSuccessModal(result.id);
+            } 
+            else {
                 alert("Error al crear proyecto.");
             }
         } catch (err) {
@@ -49,3 +50,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 });
+
+function showSuccessModal(projectId) {
+    const modal = document.createElement("div");
+    modal.classList.add("modal-decision");
+    
+    modal.innerHTML = `
+        <div class="modal-content text-center">
+            <h4>¡Proyecto creado con éxito!</h4>
+            <div class="modal-buttons mt-3">
+                <button class="decision" onclick="window.location.href='detail.html?id=${projectId}'">Ver Detalles</button>
+                <button class="decision-no" onclick="window.location.href='create.html'">Crear Otro</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+}

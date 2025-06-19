@@ -29,11 +29,11 @@
                     <li><a href="create.html">Crear nuevo proyecto</a></li>
                 </ul>
             </nav>
-                <div class="login-btn text-center mt-auto mb-3">
-                    <a href="login.html" id="loginIcon">
-                        <img src="images/usuario.png" alt="Cambiar sesión" class="user-icon" />
-                    </a>
-                </div>
+            <div class="login-btn text-center mt-auto mb-3">
+                <a href="login.html" id="loginIcon">
+                    <img src="images/usuario.png" alt="Cambiar sesión" class="user-icon" />
+                </a>
+            </div>
         </aside>
 
         <main class="main-content">
@@ -53,9 +53,19 @@
                 </div>
             </header>
 
-            <section class="cards" id="cards">
-                <!-- Carga dinámica de los proyectos -->
-            </section>
+            <div class="project-sections">
+                <section class="projects-list">
+                    <h2 class="section-title">Tus proyectos creados</h2>
+                    <div id="my-projects" class="cards"></div>
+                        <!-- Carga dinámica de proyectos creados por el usuario -->
+                </section>
+
+                <section class="projects-list">
+                    <h2 class="section-title">Proyectos donde sos revisor</h2>
+                    <div id="participating-projects" class="cards"></div>
+                        <!-- Carga dinámica de proyectos que puede revisar -->
+                </section>
+            </div>
         </main>
     </div>
 

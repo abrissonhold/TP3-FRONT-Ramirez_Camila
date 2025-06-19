@@ -28,27 +28,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     const id = params.get("id");
 
     if (!id) {
-        document.getElementById("detailcard").innerHTML = NoContent("Proyecto no encontrado");
+        const detailCardElem = document.getElementsByClassName("project-detail-container");
+        if (detailCardElem && detailCardElem.length > 0) {
+            detailCardElem[0].innerHTML = NoContent("Proyecto no encontrado");
+        }
         return;
     }
 
     try {
         const project = await getProjectById(id);
-        const container = document.getElementById("detailcard");
-        container.innerHTML = DetailCard(project, currentUser);
-        updateHeader(project.user.name);
+        const container = document.getElementsByClassName("project-detail-container");
+        if (container && container.length > 0) {
+            container[0].innerHTML = DetailCard(project, currentUser);
+            updateHeader(project.user.name, project.user.email);
+        }
     } catch (error) {
-        document.getElementById("detailcard").innerHTML = NoContent("Error al cargar el proyecto.");
-        console.error(error);
+        const detailCardElem = document.getElementsByClassName("project-detail-container");
+        if (detailCardElem) {
+            if (detailCardElem && detailCardElem.length > 0) {
+                detailCardElem[0].innerHTML = NoContent("Error al cargar el proyecto.");
+            }
+        }
     }
 });
 
-function updateHeader(name) {
+function updateHeader(name, mail) {
     const header = document.querySelector("main header h1");
-    header.textContent = `Propuesta de ${name}`;
+    header.textContent = `Propuesta de ${name} (${mail})`;
 }
 
-window.openDecisionModal = async (stepId, projectId, requiredRoleName) => {
+window.openDecisionModal = async (stepId, projectId) => {
     const { statuses } = await loadInformation();
     const modal = document.createElement("div");
     modal.classList.add("modal-decision");
