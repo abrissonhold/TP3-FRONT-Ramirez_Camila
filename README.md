@@ -1,9 +1,7 @@
 #  Frontend - Gestión de Proyectos UNAJ
-
 Este proyecto corresponde a la interfaz de usuario (UI) para un sistema de gestión y aprobación de propuestas de proyectos desarrollado como trabajo práctico universitario. Fue construido utilizando **HTML, CSS y JavaScript Vanilla**, siguiendo principios de accesibilidad, diseño limpio y separación de responsabilidades.
 
 ##  Funcionalidades
-
 - Inicio de sesión basado en usuarios precargados.
 - Creación de proyectos con formulario dinámico.
 - Visualización de proyectos divididos en:
