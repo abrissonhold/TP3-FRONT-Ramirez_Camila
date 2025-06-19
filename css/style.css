@@ -1,6 +1,6 @@
 :root {
     --light-gray: #e9e8f1;
-    --light-pink: #e79dfd;
+    --light-blue: #cbcff0;
     --light-purple: #6d6bf3;
     --transparent-purple: #a6ace44d;
     --dark-purple: #331b88;
@@ -171,7 +171,7 @@ header .filter-section {
     width: 97%;
 }
 .form-group small{
-    color : #9390d3e0;
+    color : grey;
 }
 
 /* Forms & Inputs */
@@ -191,6 +191,7 @@ select {
 #search-projects {
     width: 30%;
 }
+#search-projects:focus,
 .form-control:focus,
 select:focus {
     background-color: white;
@@ -215,11 +216,11 @@ select option:hover {
 .project-sections > section {
     flex: 1;
     min-width: 45%;
-    background-color: #ffffff;
+    background-color: white;
     padding: 1rem;
     margin: 10px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 8px var(--transparent-purple);
 
 }
 .project-sections h3 {
@@ -255,7 +256,7 @@ select option:hover {
     padding: 15px;
     margin: 10px 0px 10px 0px;
     text-align: center;
-    color: #dbdaffda;
+    color: var(--light-blue);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -352,7 +353,7 @@ select option:hover {
 .step-card {
     padding: 15px;
     border-radius: 10px;
-    background: #a6ace44d;
+    background: var(--transparent-purple);
     border: 1px solid var(--light-purple);
 }
 
@@ -459,7 +460,7 @@ button:focus {
     background-color: var(--light-gray);
     color: var(--light-purple);
     cursor: not-allowed;
-    border: 1px solid #aaa !important;
+    border: 1px solid gray !important;
 }
 
 /* Modal */
@@ -469,7 +470,7 @@ button:focus {
     left: 190px;
     width: calc(100%);
     height: calc(100%);
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--transparent-purple);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -478,7 +479,7 @@ button:focus {
     background: white;
     padding: 20px 24px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px var(--light-purple);
     width: 100%;
     max-width: 500px;
 }
@@ -525,10 +526,10 @@ button:focus {
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: var(--light-gray);
+    background: var(--transparent-purple);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--light-pink);
+    background: var(--light-purple);
     border-radius: 10px;
 }
 
