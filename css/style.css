@@ -5,7 +5,7 @@
     --transparent-purple: #a6ace44d;
     --dark-purple: #331b88;
     --dark-blue: #151240;
-    --text-dark: #060029;
+    --dark-text: #060029;
     --status-pendiente: #b99e00;
     --status-aprobado: #01913d;
     --status-rechazado: #a31000;
@@ -23,7 +23,7 @@ body {
     font-size: 0.9rem;
     background-color: var(--light-gray);
     font-weight: 400;
-    color: var(--text-dark);
+    color: var(--dark-text);
     display: flex;
     flex-direction: column;
 
@@ -43,7 +43,7 @@ body {
 }
 .loader span {
   font-size: 1.2rem;
-  color: var(--text-dark);
+  color: var(--dark-text);
   animation: blink 1.5s infinite ease-in-out;
 }
 @keyframes blink {
@@ -111,7 +111,7 @@ div.container-fluid {
 .sidebar nav ul li a.active,
 .sidebar nav ul li a:hover {
     background-color: var(--light-gray);
-    color: var(--text-dark);
+    color: var(--dark-text);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -128,7 +128,7 @@ div.container-fluid {
 }
 .login-card {
     background-color: var(--light-gray);
-    color: var(--text-dark);
+    color: var(--dark-text);
     padding: 2rem;
     border-radius: 10px;
     min-width: 300px;
@@ -184,7 +184,7 @@ select {
     border: 1px solid var(--light-purple);
     border-radius: 5px;
     background-color: var(--light-gray);
-    color: var(--text-dark);
+    color: var(--dark-text);
     transition: background-color 0.3s ease;
     height: 3.5rem;
 }
@@ -341,7 +341,7 @@ select option:hover {
     margin: 10px 0px 0px 0px;
     border: 0.5px solid var(--light-purple);
     background-color: var(--transparent-purple);
-    color: var(--text-dark);
+    color: var(--dark-text);
     width: 100%;
 }
 .steps-grid {
@@ -362,7 +362,7 @@ select option:hover {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: var(--dark-purple);
+    color: var(--dark-blue);
 }
 .project-info-grid, .steps-grid {
     display: grid;
@@ -382,7 +382,7 @@ select option:hover {
     box-shadow: 0 4px 8px var(--transparent-purple);
 }
 .description-box {
-    background: var(--dark-purple);
+    background: var(--dark-blue);
     color: var(--light-gray);
     padding: 15px;
     border-radius: 8px;
@@ -514,7 +514,7 @@ button:focus {
 /* Footer */
 .footer {
     background-color: var(--light-purple);
-    color: var(--text-dark);
+    color: var(--dark-text);
     text-align: center;
     padding: 10px;
     margin-top: auto;
