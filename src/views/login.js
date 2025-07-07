@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   users.forEach(user => {
     const opt = document.createElement("option");
     opt.value = user.id;
-    opt.textContent = `${user.name} (${user.approverRole?.name || "Sin rol"})`;
+    opt.textContent = `${user.name} (${user.role.name || "Sin rol"})`;
     select.appendChild(opt);
   });
 

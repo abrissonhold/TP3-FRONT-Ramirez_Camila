@@ -40,15 +40,22 @@ export function DetailCard(project, currentUser) {
       <h4>Pasos de aprobación</h4>
         <div class="steps-grid">
           ${project.steps.map(step => {
-            const canDecide = step.approverUser?.id === currentUser.id ||
-            (!step.approverUser && step.approverRole?.id === currentUser.approverRole?.id);
-            const previousStepsApproved = project.steps
-              .filter(s => s.stepOrder < step.stepOrder)
-              .every(s => s.status.name !== "Pending");
-            const shouldShow = step.status.name === "Pending" && canDecide && project.status.name !== "Rejected" && project.status.name !== "Observed";
-            const disabled = !previousStepsApproved;
+          const canDecide = (step.approverUser?.id == currentUser.id ||
+            (!step.approverUser &&
+              step.approverRole?.id == currentUser.role?.id));
 
-            return `
+          const previousStepsApproved = project.steps
+            .filter(s => s.stepOrder < step.stepOrder)
+            .every(s => s.status.name !== "Pending");
+
+          const shouldShow =
+            step.status.name == "Pending" &&
+            canDecide &&
+            project.status.name !== "Rejected" &&
+            project.status.name !== "Observed";
+
+          const disabled = !previousStepsApproved;
+          return `
                   <div class="step-card">
                     <div>
                       <strong>Paso ${step.stepOrder}</strong>
@@ -61,15 +68,15 @@ export function DetailCard(project, currentUser) {
 
                     ${shouldShow ? `
                       <button   class="decision ${disabled ? 'disabled-btn' : ''}" 
-                        onclick="${disabled 
-                        ? `showModal('Este paso no puede ser evaluado hasta que se aprueben los anteriores')`
-                        : `openDecisionModal(${step.id}, '${project.id}', '${step.approverRole.name}')`
-                        }"> Tomar decisión 
-                      </button>` : ""            
-                    }
-                  </div>`;
-            }).join("")}
-        </div>
+                        onclick="${disabled
+          ? `showModal('Este paso no puede ser evaluado hasta que se aprueben los anteriores')`
+          : `openDecisionModal(${step.id}, '${project.id}', '${step.approverRole.name}')`
+        }"> Tomar decisión 
+                                  </button>` : ""
+      }
+                              </div>`;
+  }).join("")}
+    </div>
     </section>
 
     ${(project.status.name === "Observed" && project.user.id === currentUser.id) ? `

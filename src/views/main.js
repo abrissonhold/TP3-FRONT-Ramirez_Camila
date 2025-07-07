@@ -58,12 +58,15 @@ async function renderFilteredProjects() {
         const allDetails = await Promise.all(projectsShort.map(p => getProjectById(p.id)));
         
         const myProjects = allDetails.filter(p => p.user?.id === userId);
+        console.log("Mis proyectos:", myProjects);
+
         const approvalProjects = allDetails.filter(p =>
             p.steps?.some(step =>
                 step.approverUser?.id === userId ||
-                (!step.approverUser && step.approverRole?.id === currentUser.approverRole?.id)
+                (!step.approverUser && step.approverRole?.id === currentUser.role?.id)
             )
         );
+        console.log("Proyectos para aprobar:", approvalProjects);
         myProjectsContainer.innerHTML = myProjects.length
             ? myProjects.map(Card).join("")
             : NoContent("No creaste ningún proyecto aún");
